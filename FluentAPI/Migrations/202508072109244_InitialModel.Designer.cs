@@ -13,7 +13,7 @@ namespace FluentAPI.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202508072051562_InitialModel"; }
+            get { return "202508072109244_InitialModel"; }
         }
         
         string IMigrationMetadata.Source

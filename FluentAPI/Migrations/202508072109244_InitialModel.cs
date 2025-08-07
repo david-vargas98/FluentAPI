@@ -21,15 +21,15 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Description = c.String(nullable: false, maxLength: 2000),
                         Level = c.Int(nullable: false),
                         FullPrice = c.Single(nullable: false),
-                        Author_Id = c.Int(),
+                        AuthorId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Authors", t => t.Author_Id)
-                .Index(t => t.Author_Id);
+                .ForeignKey("dbo.Authors", t => t.AuthorId, cascadeDelete: true)
+                .Index(t => t.AuthorId);
             
             CreateTable(
                 "dbo.Tags",
@@ -59,10 +59,10 @@
         {
             DropForeignKey("dbo.TagCourses", "Course_Id", "dbo.Courses");
             DropForeignKey("dbo.TagCourses", "Tag_Id", "dbo.Tags");
-            DropForeignKey("dbo.Courses", "Author_Id", "dbo.Authors");
+            DropForeignKey("dbo.Courses", "AuthorId", "dbo.Authors");
             DropIndex("dbo.TagCourses", new[] { "Course_Id" });
             DropIndex("dbo.TagCourses", new[] { "Tag_Id" });
-            DropIndex("dbo.Courses", new[] { "Author_Id" });
+            DropIndex("dbo.Courses", new[] { "AuthorId" });
             DropTable("dbo.TagCourses");
             DropTable("dbo.Tags");
             DropTable("dbo.Courses");
