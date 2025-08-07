@@ -31,7 +31,8 @@ namespace DataAnnotations
             modelBuilder.Entity<Course>()
                 .HasRequired(c => c.Author) // each Course has one Author (required)
                 .WithMany(a => a.Courses) // each Author has many Courses
-                .HasForeignKey(c => c.AuthorId); // AuthorId property was needed to be created in Course class
+                .HasForeignKey(c => c.AuthorId) // AuthorId property was needed to be created in Course class
+                .WillCascadeOnDelete(false); // disables cascade delete, now if we delete an Author, it won't delete the related Courses
 
             base.OnModelCreating(modelBuilder);
         }
