@@ -32,6 +32,16 @@
                 .Index(t => t.AuthorId);
             
             CreateTable(
+                "dbo.Covers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Courses", t => t.Id)
+                .Index(t => t.Id);
+            
+            CreateTable(
                 "dbo.Tags",
                 c => new
                     {
@@ -59,12 +69,15 @@
         {
             DropForeignKey("dbo.CourseTags", "Tag_Id", "dbo.Tags");
             DropForeignKey("dbo.CourseTags", "Course_Id", "dbo.Courses");
+            DropForeignKey("dbo.Covers", "Id", "dbo.Courses");
             DropForeignKey("dbo.Courses", "AuthorId", "dbo.Authors");
             DropIndex("dbo.CourseTags", new[] { "Tag_Id" });
             DropIndex("dbo.CourseTags", new[] { "Course_Id" });
+            DropIndex("dbo.Covers", new[] { "Id" });
             DropIndex("dbo.Courses", new[] { "AuthorId" });
             DropTable("dbo.CourseTags");
             DropTable("dbo.Tags");
+            DropTable("dbo.Covers");
             DropTable("dbo.Courses");
             DropTable("dbo.Authors");
         }

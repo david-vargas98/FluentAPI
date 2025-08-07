@@ -40,6 +40,12 @@ namespace DataAnnotations
                 .WithMany(t => t.Courses) // each Tag has many Courses
                 .Map(m => m.ToTable("CourseTags")); // specifies the name of the join table
 
+            // configuring one-to-one relationship between Course and Cover to solve: Unable to determine the principal
+            // end of an association between the types
+            modelBuilder.Entity<Course>()
+                .HasRequired(course => course.Cover)
+                .WithRequiredPrincipal(cover => cover.Course);
+
             base.OnModelCreating(modelBuilder);
         }
     }
