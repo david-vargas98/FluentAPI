@@ -34,6 +34,12 @@ namespace DataAnnotations
                 .HasForeignKey(c => c.AuthorId) // AuthorId property was needed to be created in Course class
                 .WillCascadeOnDelete(false); // disables cascade delete, now if we delete an Author, it won't delete the related Courses
 
+            // configuring the many-to-many relationship between Tags and Courses to rename the join table to CourseTags
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Tags) // each Course has many Tags
+                .WithMany(t => t.Courses) // each Tag has many Courses
+                .Map(m => m.ToTable("CourseTags")); // specifies the name of the join table
+
             base.OnModelCreating(modelBuilder);
         }
     }
