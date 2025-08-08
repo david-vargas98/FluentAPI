@@ -54,25 +54,25 @@
                 "dbo.CourseTags",
                 c => new
                     {
-                        Course_Id = c.Int(nullable: false),
-                        Tag_Id = c.Int(nullable: false),
+                        CourseId = c.Int(nullable: false),
+                        TagId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Course_Id, t.Tag_Id })
-                .ForeignKey("dbo.Courses", t => t.Course_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Tags", t => t.Tag_Id, cascadeDelete: true)
-                .Index(t => t.Course_Id)
-                .Index(t => t.Tag_Id);
+                .PrimaryKey(t => new { t.CourseId, t.TagId })
+                .ForeignKey("dbo.Courses", t => t.CourseId, cascadeDelete: true)
+                .ForeignKey("dbo.Tags", t => t.TagId, cascadeDelete: true)
+                .Index(t => t.CourseId)
+                .Index(t => t.TagId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.CourseTags", "Tag_Id", "dbo.Tags");
-            DropForeignKey("dbo.CourseTags", "Course_Id", "dbo.Courses");
+            DropForeignKey("dbo.CourseTags", "TagId", "dbo.Tags");
+            DropForeignKey("dbo.CourseTags", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.Covers", "Id", "dbo.Courses");
             DropForeignKey("dbo.Courses", "AuthorId", "dbo.Authors");
-            DropIndex("dbo.CourseTags", new[] { "Tag_Id" });
-            DropIndex("dbo.CourseTags", new[] { "Course_Id" });
+            DropIndex("dbo.CourseTags", new[] { "TagId" });
+            DropIndex("dbo.CourseTags", new[] { "CourseId" });
             DropIndex("dbo.Covers", new[] { "Id" });
             DropIndex("dbo.Courses", new[] { "AuthorId" });
             DropTable("dbo.CourseTags");

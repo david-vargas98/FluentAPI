@@ -38,7 +38,12 @@ namespace DataAnnotations
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.Tags) // each Course has many Tags
                 .WithMany(t => t.Courses) // each Tag has many Courses
-                .Map(m => m.ToTable("CourseTags")); // specifies the name of the join table
+                .Map(m =>
+                {
+                    m.ToTable("CourseTags"); // specifies the name of the join table
+                    m.MapLeftKey("CourseId"); // specifies the left key name (Course_Id)
+                    m.MapRightKey("TagId"); // specifies the right key name (Tag_Id)
+                });
 
             // configuring one-to-one relationship between Course and Cover to solve: Unable to determine the principal
             // end of an association between the types
