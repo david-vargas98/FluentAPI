@@ -56,6 +56,7 @@
     <Compile Include="Author.cs" />
     <Compile Include="Course.cs" />
     <Compile Include="Cover.cs" />
+    <Compile Include="EntityConfigurations\CourseConfiguration.cs" />
     <Compile Include="Migrations\202508072109244_InitialModel.cs" />
     <Compile Include="Migrations\202508072109244_InitialModel.Designer.cs">
       <DependentUpon>202508072109244_InitialModel.cs</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using FluentAPI.EntityConfigurations;
 
 namespace DataAnnotations
 {
@@ -17,7 +18,9 @@ namespace DataAnnotations
         // thi is called fluent API since we are using method calls to configure the model fluently like a story
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // The content was moved to the pertinen Configuration file
+            // The content was moved to the pertinen Configuration file, so now we need to reference it here as follows:
+            modelBuilder.Configurations.Add(new CourseConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }
